@@ -201,11 +201,13 @@ auto plugin_type_to_string(FMOD_PLUGINTYPE type) -> std::string_view {
   }
 }
 
-void print_float_parameter(const FMOD_DSP_PARAMETER_DESC_FLOAT& desc) {
-  std::println("  Range: [{}, {}], Default: {}", desc.min, desc.max, desc.defaultval);
+void print_float_parameter(const FMOD_DSP_PARAMETER_DESC_FLOAT &desc) {
+  std::println("  Range: [{}, {}], Default: {}", desc.min, desc.max,
+               desc.defaultval);
   std::println("  Mapping: {}", float_mapping_to_string(desc.mapping.type));
-  if (desc.mapping.type == FMOD_DSP_PARAMETER_FLOAT_MAPPING_TYPE_PIECEWISE_LINEAR) {
-    const auto& pw = desc.mapping.piecewiselinearmapping;
+  if (desc.mapping.type ==
+      FMOD_DSP_PARAMETER_FLOAT_MAPPING_TYPE_PIECEWISE_LINEAR) {
+    const auto &pw = desc.mapping.piecewiselinearmapping;
     if (pw.numpoints <= 0) {
       std::println("  (piecewise mapping with zero points)");
       return;
